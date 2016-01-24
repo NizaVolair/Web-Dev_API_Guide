@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Series ID</title>
+  <link rel="stylesheet" href="style.css" type="text/css">
+ </head>
+ <body>
+	<h3>Series ID</h3>
+	
+	<p>To search for your specific information, you’ll need a Series ID which is a bit tricky. You need to combine several codes to produce results for specific information and industries. After doing this, the resulting Series ID has a good chance of not working on the first try, as it is not easy to combine all the needed codes correctly. 
+	
+	<p>To test things out, I’d recommend using this helpful <a href='http://beta.bls.gov/dataQuery/'>search tool</a> Here you can easily track down information you are interested in without the hassle of trying to link together all those pesky codes. With a quick search of “Web Developer” I found this result:
+	
+	<div><img src='WebDevSearchSeriesID.png'></div>
+	
+	<p>The red arrow is pointing to the Series ID code that we can use in our request to find the number of Web Developers employed in Software Publishing. Be aware though, that just having a working Series ID doesn’t guarantee that the information is available. When we do a quick GET request using the ID from our previous search, this is our result:
+	
+	<div><img src='WebDevGETRes.png'></div>
+	
+	<p>Information is unavailable for 2012 and 2013, but we do get a result for 2014. 
+	This also illustrates a useful point; the default result will give a <em>three year time period of results</em> (available or not), but we will talk about how to get more specific with our requests later in this guide.
+	
+	<p>If you need specific information that you aren’t finding with the searchable page above, check out this link the big bad lists on the <a href='http://www.bls.gov/help/hlpforma.htm#ce'>Series ID codes formatting page</a> where you can paste together specific codes, cross your fingers, and hope to find a working Series ID result.
+	
+	<div><a href='Requests.html'>Next Page: Requests Overview</a></div>
+	<div><a href='APIGuideHomePage.html'>Back to Home Page</a></div>
+ </body>
+</html>
+

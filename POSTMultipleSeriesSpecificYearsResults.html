@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>POSTMultipleSeriesSpecificYearsResults</title>
+  <link rel="stylesheet" href="style.css" type="text/css">
+ </head>
+ <body>
+	<h3>POST Multiple Series within Specific Years & Results</h3>
+	<p>The code for this is similar to the last example, just with added parameters. To ask for additional information in your POST request, you’ll use a format similar to this:
+	<pre><code>{
+		{"seriesid":["ID1","ID2"],
+		"startyear":"2000", 
+		"endyear":"2010",
+		"catalog":true,
+		"calculations":true,
+		"annualaverage":true,
+		"registrationKey":"yourKeyHere"
+		}
+	}</code></pre>
+	<p>Here are a few notes about making more specific POST queries:
+	<ul>
+		<li>The Series ID work the same as we’ve discussed.
+		<li>The start and end year should be in a 4 digit format and can be a maximum of 20 year difference with Version 2 (10 years with Version 1).
+		<li>The catalog , calculations, and annual average settings can be true or false depending on whether or not the you would like catalog data (this is only available on select queries which you can locate in the  <a href='http://beta.bls.gov/dataQuery/find'>simple database where we searched for Series IDs</a> if you would like additional calculations returned, or if you would like the annual average respectively.
+		<li>Registration key is the same as in a simple POST request.
+	</ul>
+	<p>Results will be the same as in the earlier POST request as well, only now you should see results for the additional data you queried. Do keep in mind though, not all information will have this extra information available, and when working with the results, be prepared to sometimes not have all the info.
+	
+	<p>Congratulations! You've made it to the end of this guide. For futher information you can always reference the <a href='http://www.bls.gov/developers/home.htm'>official source</a>.
+	<div><a href='APIGuideHomePage.html'>Back to Home Page</a></div>
+ </body>
+</html>

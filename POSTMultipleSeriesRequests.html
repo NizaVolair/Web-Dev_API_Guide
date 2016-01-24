@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>POSTMultipleSeriesRequests</title>
+  <link rel="stylesheet" href="style.css" type="text/css">
+ </head>
+ <body>
+	<h3>POST Multiple Series Requests</h3>
+	
+	<p>You’ll need to specify in the content-type header that this is an application/json request
+	A simple payload will look something like this:
+	<pre><code>{
+		"registrationKey":"yourKeyHere"
+		}
+		The following code should give you an example of the differences:
+		app.post("/postPage", function(req, res, next){
+			var context = {};
+			console.log("test");
+			request({
+				"url":"http://api.bls.gov/publicAPI/v2/timeseries/data/",
+				"method":"POST",
+				"headers":{"Content-Type":"application/json"},
+				"body":{"seriesid":["CEU0800000003","LAUCN040010000000006"],
+				"registrationKey":"831b88021f4847d4ab40b5f94b9118ee"}
+			}, function(err, response, body){
+				console.log("test2");
+				if(!err && response.statusCode < 400){
+					context.results = body;
+					res.render('YourPage', context);
+					console.log(context.results);
+				}
+				else{
+						if(response){
+							console.log(response.statusCode);
+						}
+						next(err);
+				}
+			});
+		});
+	}</code></pre>
+	<p>Lets go ahead and step-by-step this one as well to understand what we're doing:
+	<ul>
+		<li>First we want to set up our registration key to a variable. This isn't required, but will make changing it and sharing code easier in the future.
+		<li>Next, we make the request by sending a json object holding the URL, method, body, and our key.
+		<li>Lastly, we can handle the response much like that of the GET request making sure to include some error handling. 
+	</ul>
+	<p>Of course, this can have more Series IDs if you would like to query for additional information.
+	
+	<div><img src='POSTWebDevResponse.png'></div>
+	
+	<p>Here we are using see a sample response when searching for the same information from our GET request about Web Developers in Software Publishing (bottom result) and a new Series ID query about the number of Web Developers in Other Information Services (top result). 
+	
+	<p>The value results show us that while there are quite a few web developers working in the software industry, there are twice that number working in other information services.   
+	
+	<div><a href='POSTMultipleSeriesSpecificYearsResults.html'>Next Page: POST Multiple Series with Specific Years & Results</a></div>
+	<div><a href='APIGuideHomePage.html'>Back to Home Page</a></div>
+ </body>
+</html>

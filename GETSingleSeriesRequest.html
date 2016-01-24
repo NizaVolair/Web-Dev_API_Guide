@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>GET Single Series Request</title>
+  <link rel="stylesheet" href="style.css" type="text/css">
+ </head>
+ <body>
+	<h3>GET Single Series Request</h3>
+	<p>To make a get call, you can try out the following sample JavaScript code made using express and handlebars:
+	<pre><code>{
+		singleSeriesID = "YourSeriesID";
+		app.get('/getPage', function(req, res, next){
+			var context = {};
+				request('http://api.bls.gov/publicAPI/v2/timeseries/data/' + singleSeriesID, function(err, response, body){
+					if(!err && response.statusCode < 400){
+						context.results = body;
+						res.render('YourPage', context);
+						console.log(context.results);
+					}
+					else{
+						if(response){
+							console.log(response.statusCode);
+						}
+						next(err);
+					}
+			});
+		});
+	}</code></pre>
+	<p>Now, lets go through this request step-by-step and explain what we're doing:
+	<ul>
+		<li>First you will want to set up a context variable to hold the results.
+		<li>Next, make a request with the Series ID for the information you are seeking. I suggest using a variable to make managing the ID easier.
+		<li>If there was no error and the status code is less than 400, then congratulations your request was a sucess! You can 
+		<li>Set the body to be a results property of the context variable we set up earlier
+			<ul>
+				<li>Render context on a page
+				<li>And even print it to the console.
+				<li>If you got a response that was over 400, then display the status code
+			</ul>
+		<li>If you didn’t even get a response, just pass along an error as something has gone really wrong
+		<li>After the request, you can write a few error handlers.  The website has a list of all the possible errors. I’d recommend at least these two: 
+		<li>The first will be for the common 404 page not found, which is quite common with those tricky Series IDs and the second is for the horrible everything has gone wrong and you didn’t even get a response situation.
+		<li>Now, create a listener for your port of choice and test your code!
+		<li>Note, I’d recommend skipping the API key for GETs as it isn’t clear how to send it correctly, and with single quires you probably won’t be searching to often anyway
+	</ul>
+	
+	<h4>Get Single Series Response</h4>
+	
+	<p>Now let’s look a little closer at that sample GET response that we mentioned earlier which was inquiring about the number of Web Developers employed in Software Publishing. Here it is again:
+		
+	<div><img src='WebDevGETRes.png'></div>
+	
+	<p>First we see the status is “REQUEST_SUCCEEDED” letting us know that our query went through without a hitch. Next comes the response time of 37. 
+	
+	<p>In the message, we see that as was before mentioned, we searched for the default three years, but the first two years, 2012 and 2013, had no data.
+	
+	<p>The results section shows us our Series ID we searched for, and the data available which in this case is only from 2014. We find the period code, the period name lets us know this is annual information for this specific year, and we also get to the meat of the matter which is our value of 3110 that lets us know this was the number of Web Developers employes in the Software Industry in 2014.
+	
+	<div><a href='POSTMultipleSeriesRequests.html'>Next Page: POST Multiple Series Requests</a></div>
+	<div><a href='APIGuideHomePage.html'>Back to Home Page</a></div>
+ </body>
+</html>
